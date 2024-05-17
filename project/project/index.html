@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Solution Circle</title>
+    <link rel="stylesheet" href="CSS/style.css" />
+  </head>
+  <body>
+    <div class="hero">
+      <img class="images" src="images/canvalogo2.png" />
+      <div class="container-button">
+        <a href="/user_login.html" class="log">Login</a>
+        <a href="/user_signin.html" class="reg">Sign up</a>
+      </div>
+
+      <hr />
+
+      <div class="container">
+        <h1>Welcome to Solution Circle</h1>
+        <h2 style="color: rgb(244, 246, 247)">
+          The Solution Circle Project is an interactive platform<br />
+          designed to enhance the communication and collaboration between
+          students and teachers.
+        </h2>
+      </div>
+    </div>
+    <h1 class="heading">DIGITAL WORLD!</h1>
+    <div class="image">
+      <img height="300px" src="images/neww.jpg" />
+    </div>
+
+    <div>
+      <div class="button-container">
+        <!-- <a href="idea/idea12.html" class="button"
+          >Attendance Management System</a
+        > -->
+        <a href="idea/idea15.html" class="button"
+          >Study Group Collaboration Tool</a
+        >
+
+        <a href="idea/idea2.html" class="button"
+          >Classroom Communication Platform</a
+        >
+        <a href="idea/idea1.html" class="button">Student Grade Tracker</a>
+
+        <a href="idea/idea3.html" class="button">Online Quiz System</a>
+        <a href="idea/idea4.html" class="button">Timetable Scheduler</a>
+        <a href="idea/idea7.html" class="button">Classroom Discussion </a>
+        <a href="idea/idea5.html" class="button">Note Taking App</a>
+
+        <!-- <a href="idea/idea8.html" class="button">Virtual Classroom</a> -->
+        <!-- <a href="idea/idea11.html" class="button">Student Portfolio Website</a> -->
+        <a href="idea/idea9.html" class="button">Grade Calculator</a>
+
+        <!-- <a href="idea/idea13.html" class="button">E-Learning Platform</a> -->
+
+        <!-- Add more buttons for additional ideas -->
+      </div>
+    </div>
+    <div class="container2">
+      <h1 class="heading2">ABOUT!</h1>
+      <br /><br /><br />
+
+      <p class="about">
+        The Solution Circle Project is an interactive platform designed to
+        enhance the communication and collaboration between students and
+        teachers.
+        <br />
+        The project aims to address the challenges faced in traditional
+        educational providing a comprehensive solution for effective
+        student-teacher interactions.<br />
+        The system allows students to track their grades, participate in
+        classroom discussions, access study materials, and collaborate with
+        peers.
+        <br />
+        Teachers, on the other hand, can manage assignments, provide feedback,
+        communicate with students, and monitor their progress.<br />
+      </p>
+    </div>
+    <script>
+      const userId = localStorage.getItem("userId");
+      if (userId) {
+        document.querySelector(".container-button").innerHTML = `
+        <button onclick="logout()" class="reg">Logout</button>`;
+      }
+
+      function logout() {
+        console.log("thisis working");
+        localStorage.removeItem("userId");
+        window.location.href = "/user_login.html";
+      }
+    </script>
+  </body>
+</html>

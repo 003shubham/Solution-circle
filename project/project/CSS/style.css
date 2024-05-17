@@ -1,0 +1,252 @@
+body{
+    background-color: #cedfee;
+}
+
+.hero{
+    background-image: url('../images/new3.jpg');
+    background-color: #555cd9;
+    background-size: 100%;
+    padding-top: 0%;
+    margin-top: -10px;
+    margin-left: -5px;
+    margin-right: -5px;
+    padding: 0%;
+}
+.hero>.images{
+    height: 40px;
+    width: 50px;
+    margin-left: 20px;
+    margin-top: 10px;
+    
+    float: left;
+}
+.you{
+    height: 40px;
+   
+}
+
+hr{
+
+    
+    margin-bottom: 10px;
+    margin-top: -15px;
+    width: 100%;
+    margin-left: 0%;
+    border: 2px solid rgb(164, 243, 255); 
+
+}
+.heading{
+    color: #050a69;
+    margin-top: 50px;
+    margin-bottom: -50px;
+    font-size: 40PX;
+}
+.heading2{
+    color: #050a69;
+    margin-top: 50px;
+    margin-bottom: -50px;
+    font-size: 40PX;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 15%;
+    color: #faf7f7;
+    text-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
+    font-size: 80px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.image{
+    float: right;
+    
+    margin-top: 8%;
+    margin-left: 10px;
+    
+    
+}
+
+.container {
+    
+    padding-bottom: 300px;
+    text-align: center;
+    border: 10px solid rgb(164, 243, 255);
+    margin: -0%;
+    
+}
+.container-button
+{
+   margin-left: 85%;
+   margin-bottom: 20px;
+   margin-top: 10px;
+   
+}
+.log{
+    font-size: 20px;
+    border-radius: 5%;
+    padding: 5px;
+    color: #ffffff;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-top: 10px;
+    
+}
+.log:hover{
+    background-color: #0f4a81;
+}
+.reg{
+    font-size: 20px;
+    border-radius: 5%;
+    padding: 5px;
+    color:#ffffff;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
+}
+.reg:hover{
+    background-color: #0f4a81;
+}
+.button-container {
+    display: grid;
+    height:300px;
+    display: grid;
+    grid-template-columns: auto auto auto ;
+    gap: 8px;
+    margin-top: 100px;
+    
+    margin-left: -10px;
+    
+    text-align: center;
+    
+   
+}
+
+
+.button {
+    display: grid;
+    padding: 10px 10px;
+    margin: 10px;
+    color: #050a69;;
+    border: 2px solid rgb(134, 164, 238);
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 23px;
+    transition: background-color 0.3s;
+    border-radius: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
+}
+
+
+.button1 {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 25px;
+    transition: background-color 0.3s;
+    border-radius: 20px;
+}
+
+.button1:hover {
+    background-color: rgb(255, 0, 0); /* Change the hover color to different RGB value */
+}
+
+.button1:nth-child(1) {
+    background-color: #2d1de4;
+}
+
+.button1:nth-child(2) {
+    background-color: #eff6f8;
+}
+
+.button:hover {
+    background-color: rgb(255, 0, 0); /* Change the hover color to different RGB value */
+}
+
+/* Assign different background color to each button */
+
+
+.button:nth-child(1) {
+    background-color:rgba(137, 203, 244, 0.866); 
+    
+}
+
+.button:nth-child(2) {
+    background-color:rgba(137, 203, 244, 0.866);
+}
+
+.button:nth-child(3) {
+    background-color:rgba(137, 203, 244, 0.866);
+}
+
+.button:nth-child(4) {
+    background-color: rgba(137, 203, 244, 0.866);
+}
+
+.button:nth-child(5) {
+    background-color:rgba(137, 203, 244, 0.866);
+}
+
+.button:nth-child(6) {
+    background-color:  rgba(137, 203, 244, 0.866);
+}
+
+.button:nth-child(7) {
+    background-color:rgba(137, 203, 244, 0.866);
+}
+
+.button:nth-child(8) {
+    background-color: rgba(137, 203, 244, 0.866);
+}
+
+.button:nth-child(9) {
+    background-color:  rgba(137, 203, 244, 0.866);
+}
+
+.button:nth-child(10) {
+    background-color: rgba(137, 203, 244, 0.866);
+}
+
+.button:nth-child(11) {
+    background-color: rgba(137, 203, 244, 0.866);
+}
+
+.button:nth-child(12) {
+    background-color: rgba(137, 203, 244, 0.866);
+}
+
+.button:nth-child(13) {
+    background-color:  rgba(137, 203, 244, 0.866);
+}
+
+.button:nth-child(14) {
+    background-color:rgba(137, 203, 244, 0.866);
+}
+
+.button:nth-child(15) {
+    background-color: rgba(137, 203, 244, 0.866);
+}
+
+.about{
+    
+    margin-left: 15px;
+    font-size: 20px;
+    margin-top: 10px;
+}
+.container2{
+    border: 2px solid rgb(15, 129, 205);
+    background-color: #9dc1e2;
+    text-align: center;
+    margin-top: 200px;
+    
+    
+   
+}
+
+.heading2{
+    margin-top: 15px;
+}
+.images2{
+    align-items: center;
+}

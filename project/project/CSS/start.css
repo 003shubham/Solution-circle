@@ -1,0 +1,39 @@
+body{
+    background-color: rgba(0, 0, 0, 0.827);
+  text-align:center;
+  margin-top: 15%;
+}
+.image1{
+   border-radius: 10%;
+}
+h1{
+    color: azure;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+h2{
+    color: rgba(255, 255, 255, 0.571);
+    font-family:'Times New Roman', Times, serif;
+    font-size: 120%;
+}
+.log{
+    font-size: 20px;
+    border-radius: 5%;
+    padding: 8px 70px 8px 70px;
+    
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    margin-top: 10px;
+}
+.log:hover{
+    background-color: rgb(53, 97, 199);
+}
+.reg{
+    font-size: 20px;
+    border-radius: 5%;
+    padding: 8px 70px 8px 70px;
+   
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    margin-top: 10px;
+}
+.reg:hover{
+    background-color: rgb(53, 97, 199);
+}

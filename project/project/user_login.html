@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>User Login</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+
+    <style>
+      /* Custom CSS styles */
+      body {
+        background-color: #0957a4;
+        background-image: url("images/one.jpg");
+        background-repeat: no-repeat;
+        background-size: 100% 130%;
+      }
+
+      .login-container {
+        max-width: 400px;
+        margin: 20% auto 30px;
+        padding: 20px;
+        border: 1px solid #b4a02d;
+        border-radius: 5px;
+        background-color: #e3e3da;
+      }
+
+      .form-group {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3 login-container">
+          <h2 class="text-center">User Login</h2>
+          <form id="login-form">
+            <div class="form-group">
+              <label for="username">Username:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                required
+              />
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      // JavaScript for form validation
+      const loginForm = document.getElementById("login-form");
+
+      loginForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        // Add your authentication logic here
+        // Example: Check if the username and password are valid in your backend database
+
+        try {
+          const myHeaders = new Headers();
+          myHeaders.append("Content-Type", "application/json");
+
+          const raw = JSON.stringify({
+            username,
+            password,
+          });
+
+          const requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow",
+          };
+
+          const response = await fetch(
+            "http://localhost:3000/login",
+            requestOptions
+          );
+          const result = await response.text();
+          const parsedResult = JSON.parse(result);
+          console.log("result", parsedResult);
+          if (parsedResult.error) {
+            throw parsedResult.error;
+          }
+          localStorage.setItem("userId", parsedResult._id);
+          alert("Login successful!");
+          window.location.href = "/";
+        } catch (error) {
+          console.error("error", error);
+          // If error.error is undefined, it will alert 'undefined'.
+          // So, check if error.error exists, else just alert the error
+          alert(error.error ? error.error : error);
+        }
+      });
+    </script>
+  </body>
+</html>

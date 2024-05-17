@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Classroom Discussion Forum</title>
+    <style>
+      /* CSS Styles */
+      body {
+        font-family: cursive;
+        background-color: #f1f1f1;
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      .discussion-container {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      .discussion-container h3 {
+        margin-top: 0;
+      }
+
+      .message-container {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-bottom: 5px;
+      }
+
+      .message-container p {
+        margin: 0;
+      }
+
+      .message-container small {
+        font-style: italic;
+        color: #777;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        margin-bottom: 10px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .btn:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Classroom Discussion Forum</h1>
+
+    <div id="discussion-container">
+      <!-- Existing discussions will be displayed here -->
+    </div>
+
+    <div class="discussion-container">
+      <h3>New Discussion</h3>
+      <textarea
+        id="discussion-topic"
+        placeholder="Enter discussion topic"
+      ></textarea>
+      <h1></h1>
+      <button class="btn" onclick="addDiscussion()">Add Discussion</button>
+    </div>
+
+    <script>
+      // Function to add a new discussion
+      async function addDiscussion() {
+        var discussionTopic = document.getElementById("discussion-topic").value;
+
+        if (discussionTopic.trim() === "") {
+          alert("Please enter a discussion topic.");
+          return;
+        }
+
+        try {
+          const myHeaders = new Headers();
+          myHeaders.append("Content-Type", "application/json");
+
+          const raw = JSON.stringify({
+            topic: discussionTopic,
+          });
+
+          const requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow",
+          };
+
+          const response = await fetch(
+            "http://localhost:3000/discussion",
+            requestOptions
+          );
+          const result = await response.text();
+          console.log(result);
+          // Clear input field
+          document.getElementById("discussion-topic").value = "";
+          getDiscussion();
+        } catch (error) {
+          console.error("error", error);
+        }
+      }
+
+      // Function to add a new message
+      async function addMessage(event, discussionId) {
+        var messageInput = event.target.previousElementSibling;
+        var messageContent = messageInput.value;
+
+        if (messageContent.trim() === "") {
+          alert("Please enter a message.");
+          return;
+        }
+
+        if (!localStorage.getItem("userId")) {
+          alert("Please login to add message");
+          return;
+        }
+
+        try {
+          const myHeaders = new Headers();
+          myHeaders.append("Content-Type", "application/json");
+
+          const raw = JSON.stringify({
+            content: messageContent,
+            sender: localStorage.getItem("userId"),
+          });
+
+          const requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow",
+          };
+
+          const response = await fetch(
+            `http://localhost:3000/discussion/${discussionId}/message`,
+            requestOptions
+          );
+          const result = await response.text();
+          console.log(result);
+          // Clear input field
+          messageInput.value = "";
+          getDiscussion();
+        } catch (error) {
+          console.error("error", error);
+        }
+      }
+
+      async function getDiscussion() {
+        try {
+          const requestOptions = {
+            method: "GET",
+            redirect: "follow",
+          };
+
+          const response = await fetch(
+            "http://localhost:3000/discussion",
+            requestOptions
+          );
+          const result = await response.text();
+          discussions = JSON.parse(result);
+          console.log(result);
+          const discussionContainer = document.getElementById(
+            "discussion-container"
+          );
+          discussionContainer.innerHTML = ""; // Clear the container
+
+          // Loop through each discussion
+          discussions.forEach((discussion) => {
+            var discussionDiv = document.createElement("div");
+            discussionDiv.classList.add("discussion-container");
+
+            var topicElement = document.createElement("h3");
+            topicElement.innerText = discussion.topic;
+
+            discussionDiv.appendChild(topicElement);
+            var messageInput = document.createElement("textarea");
+            messageInput.placeholder = "Enter your message";
+
+            var messageButton = document.createElement("button");
+            messageButton.classList.add("btn");
+            messageButton.innerText = "Add Message";
+            messageButton.onclick = (event) =>
+              addMessage(event, discussion._id);
+
+            discussionDiv.appendChild(messageInput);
+            discussionDiv.appendChild(messageButton);
+
+            // Loop through each message in the discussion
+            discussion.messages.forEach((message) => {
+              var messageDiv = document.createElement("div");
+              messageDiv.classList.add("message-container");
+
+              var messageContentElement = document.createElement("p");
+              messageContentElement.innerText = message.content;
+
+              var messageAuthorElement = document.createElement("small");
+              messageAuthorElement.innerText =
+                "Posted by: " + message.sender.username;
+
+              messageDiv.appendChild(messageContentElement);
+              messageDiv.appendChild(messageAuthorElement);
+
+              discussionDiv.appendChild(messageDiv);
+            });
+
+            discussionContainer.appendChild(discussionDiv);
+          });
+        } catch (error) {
+          console.error("error", error);
+        }
+      }
+
+      getDiscussion();
+    </script>
+  </body>
+</html>

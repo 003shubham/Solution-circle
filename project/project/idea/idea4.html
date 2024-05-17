@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Timetable Scheduler</title>
+  <style>
+    /* CSS Styles */
+    body {
+      font-family:cursive;
+      background-color: #f1f1f1;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    td input {
+      width: 100%;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 8px 16px;
+      margin-bottom: 10px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Timetable Scheduler</h1>
+
+  <table>
+    <tr>
+      <th>Day/Time</th>
+      <th>8:00 AM - 9:00 AM</th>
+      <th>9:00 AM - 10:00 AM</th>
+      <th>10:00 AM - 11:00 AM</th>
+      <th>11:00 AM - 12:00 PM</th>
+      <th>12:00 PM - 1:00 PM</th>
+      <th>1:00 PM - 2:00 PM</th>
+      <th>2:00 PM - 3:00 PM</th>
+      <th>3:00 PM - 4:00 PM</th>
+      <th>4:00 PM - 5:00 PM</th>
+    </tr>
+    <tr>
+      <td>Monday</td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+    </tr>
+    <tr>
+      <td>Tuesday</td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+    </tr>
+    <tr>
+      <td>Wednesday</td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+    </tr>
+    <tr>
+      <td>Thursday</td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+    </tr>
+    <tr>
+      <td>Friday</td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+    </tr>
+  </table>
+  <h1></h1>
+  <button class="btn" onclick="saveTimetable()">Save Timetable</button>
+
+  <script>
+    // Function to save the timetable to localStorage
+    function saveTimetable() {
+      var timetable = [];
+      var tableRows = document.getElementsByTagName('tr');
+
+      for (var i = 1; i < tableRows.length; i++) {
+        var tableCells = tableRows[i].getElementsByTagName('td');
+        var dayTimetable = [];
+
+        for (var j = 1; j < tableCells.length; j++) {
+          var inputElement = tableCells[j].getElementsByTagName('input')[0];
+          var value = inputElement.value;
+
+          dayTimetable.push(value);
+        }
+
+        timetable.push(dayTimetable);
+      }
+
+      localStorage.setItem('timetable', JSON.stringify(timetable));
+      alert('Timetable saved successfully!');
+    }
+
+    // Function to load the timetable from localStorage
+    function loadTimetable() {
+      var timetable = localStorage.getItem('timetable');
+
+      if (timetable) {
+        timetable = JSON.parse(timetable);
+
+        var tableRows = document.getElementsByTagName('tr');
+
+        for (var i = 1; i < tableRows.length; i++) {
+          var tableCells = tableRows[i].getElementsByTagName('td');
+          var dayTimetable = timetable[i - 1];
+
+          for (var j = 1; j < tableCells.length; j++) {
+            var inputElement = tableCells[j].getElementsByTagName('input')[0];
+            inputElement.value = dayTimetable[j - 1];
+          }
+        }
+      }
+    }
+
+    // Load timetable on page load
+    loadTimetable();
+  </script>
+</body>
+</html>

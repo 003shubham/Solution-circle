@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Study Group Collaboration Tool</title>
+    <style>
+      /* CSS Styles */
+      body {
+        font-family: cursive;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      .chat-container {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-top: 20px;
+        max-height: 400px;
+        overflow-y: scroll;
+      }
+
+      .chat-message {
+        margin-bottom: 10px;
+      }
+
+      .chat-message .sender {
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      .chat-message .time {
+        color: #888;
+        font-size: 12px;
+      }
+
+      .input-container {
+        display: flex;
+        margin-top: 10px;
+      }
+
+      .input-container input[type="text"] {
+        flex-grow: 1;
+        padding: 5px;
+      }
+
+      .input-container button {
+        margin-left: 10px;
+        padding: 5px 10px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Study Group Collaboration Tool</h1>
+
+      <div class="chat-container">
+        <div class="chat-message">
+          <span class="sender">John:</span>
+          <span class="message">Hello, anyone here?</span>
+          <span class="time">(9:00 AM)</span>
+        </div>
+        <div class="chat-message">
+          <span class="sender">Jane:</span>
+          <span class="message">Yes, I'm here.</span>
+          <span class="time">(9:01 AM)</span>
+        </div>
+        <div class="chat-message">
+          <span class="sender">John:</span>
+          <span class="message"
+            >Great! Let's start discussing the assignment.</span
+          >
+          <span class="time">(9:02 AM)</span>
+        </div>
+      </div>
+
+      <div class="input-container">
+        <input type="text" id="messageInput" placeholder="Type your message" />
+        <button id="sendButton">Send</button>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+
+    <script>
+      // JavaScript code for handling chat functionality
+      var messageInput = document.getElementById("messageInput");
+      var sendButton = document.getElementById("sendButton");
+      var chatContainer = document.querySelector(".chat-container");
+
+      const socket = io("http://localhost:3000");
+
+      socket.on("groupchat", (groupChat) => {
+        console.log("New group chat:", groupChat);
+        var chatMessage = document.createElement("div");
+        chatMessage.classList.add("chat-message");
+        chatMessage.innerHTML = `
+            <span class="sender">${groupChat.sender.username}:</span>
+            <span class="message">${groupChat.message}</span>
+            <span class="time">(${new Date(
+              groupChat.time
+            ).toLocaleTimeString()})</span>
+          `;
+        chatContainer.appendChild(chatMessage);
+        // console.log(JSON.parse(groupChat));
+      });
+
+      socket.on("error", (error) => {
+        console.error("Error:", error);
+      });
+      sendButton.addEventListener("click", async function () {
+        var message = messageInput.value;
+        var sender = localStorage.getItem("userId");
+        if (!sender) {
+          alert("Please login to send message");
+          return;
+        }
+
+        socket.emit("groupchat", {
+          message: message,
+          userId: sender,
+        });
+        messageInput.value = "";
+      });
+
+      async function getMessages() {
+        try {
+          const requestOptions = {
+            method: "GET",
+            redirect: "follow",
+          };
+
+          const response = await fetch(
+            "http://localhost:3000/groupchat",
+            requestOptions
+          );
+          const result = await response.text();
+
+          messages = JSON.parse(result);
+          chatContainer.innerHTML = "";
+          messages.forEach((message) => {
+            var chatMessage = document.createElement("div");
+            chatMessage.classList.add("chat-message");
+            chatMessage.innerHTML = `
+                <span class="sender">${message.sender.username}:</span>
+                <span class="message">${message.message}</span>
+                <span class="time">(${new Date(
+                  message.time
+                ).toLocaleTimeString()})</span>
+              `;
+            chatContainer.appendChild(chatMessage);
+            chatMessage.scrollIntoView();
+          });
+        } catch (error) {
+          console.error("error", error);
+        }
+      }
+
+      getMessages();
+    </script>
+  </body>
+</html>

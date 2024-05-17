@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Task Management App</title>
+  <style>
+    /* CSS Styles */
+    body {
+      font-family:cursive;
+      background-color: #f1f1f1;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .task-container {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .task-container input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 8px 16px;
+      margin-bottom: 10px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Task Management App</h1>
+
+  <div id="task-container">
+    <!-- Existing tasks will be displayed here -->
+  </div>
+
+  <div class="task-container">
+    <h3>New Task</h3>
+    <input type="checkbox" id="task-status">
+    <input type="text" id="task-name" placeholder="Enter task name">
+    <h1></h1>
+    <button class="btn" onclick="addTask()">Add Task</button>
+  </div>
+
+  <script>
+    // Function to add a new task
+    function addTask() {
+      var taskName = document.getElementById('task-name').value;
+      var taskStatus = document.getElementById('task-status').checked ? 'completed' : 'pending';
+
+      if (taskName.trim() === '') {
+        alert('Please enter a task name.');
+        return;
+      }
+
+      var taskContainer = document.getElementById('task-container');
+
+      var taskDiv = document.createElement('div');
+      taskDiv.classList.add('task-container');
+
+      var taskCheckbox = document.createElement('input');
+      taskCheckbox.type = 'checkbox';
+      taskCheckbox.checked = taskStatus === 'completed';
+
+      var taskNameElement = document.createElement('span');
+      taskNameElement.innerText = taskName;
+
+      taskDiv.appendChild(taskCheckbox);
+      taskDiv.appendChild(taskNameElement);
+      taskContainer.appendChild(taskDiv);
+
+      // Clear input fields
+      document.getElementById('task-name').value = '';
+      document.getElementById('task-status').checked = false;
+    }
+  </script>
+</body>
+</html>

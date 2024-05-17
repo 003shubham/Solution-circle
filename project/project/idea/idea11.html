@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Portfolio</title>
+  <style>
+    /* CSS Styles */
+    body {
+      font-family:cursive;
+      background-color: #f1f1f1;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .profile-image {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 20px;
+    }
+
+    .profile-info {
+      flex-grow: 1;
+    }
+
+    .name {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .bio {
+      margin: 10px 0;
+    }
+
+    .links {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .link {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    .link:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Student Portfolio</h1>
+
+    <div class="profile">
+      <img class="profile-image" src="profile-image.jpg" alt="Profile Image">
+      <div class="profile-info">
+        <h2 class="name">John Doe</h2>
+        <p class="bio">Computer Science Student</p>
+      </div>
+    </div>
+
+    <div class="links">
+      <a href="#" class="link">Projects</a>
+      <a href="#" class="link">Skills</a>
+      <a href="#" class="link">Resume</a>
+      <a href="#" class="link">Contact</a>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript code to display the current year
+    var yearElement = document.createElement('span');
+    yearElement.textContent = new Date().getFullYear();
+    document.body.appendChild(yearElement);
+  </script>
+</body>
+</html>

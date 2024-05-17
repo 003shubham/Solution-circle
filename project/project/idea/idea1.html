@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Student Grade Tracker</title>
+        <style>
+            /* CSS Styles */
+            body {
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                background-color: #b6e4fb;
+                padding: 20px;
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                padding: 10px;
+                text-align: center;
+                border-bottom: 1px solid #3d88e4;
+            }
+
+            th {
+                background-color: #f3f5f5;
+            }
+
+            td input {
+                width: 50px;
+            }
+
+            td input[type="text"] {
+                width: 100%;
+            }
+
+            .btn {
+                display: inline-block;
+                padding: 8px 16px;
+                margin-bottom: 10px;
+                background-color: #f2f6f8;
+                color: #000000;
+                border: none;
+                cursor: pointer;
+                text-decoration: none;
+            }
+
+            .btn:hover {
+                background-color: #0ba9f2;
+            }
+            .container {
+                border: 2px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Student Grade Tracker</h1>
+
+        <table class="container">
+            <tr>
+                <th>Student Name</th>
+                <th>Assignment 1</th>
+                <th>Assignment 2</th>
+                <th>Assignment 3</th>
+                <th>Exam</th>
+                <th>Total</th>
+            </tr>
+            <tr>
+                <td>Student 1</td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td class="total"></td>
+            </tr>
+            <tr>
+                <td>Student 2</td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td class="total"></td>
+            </tr>
+            <tr>
+                <td>Student 3</td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td class="total"></td>
+            </tr>
+            <tr>
+                <td>Student 4</td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td class="total"></td>
+            </tr>
+            <tr>
+                <td>Student 5</td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td class="total"></td>
+            </tr>
+            <tr>
+                <td>Student 6</td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td class="total"></td>
+            </tr>
+            <tr>
+                <td>Student 7</td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td class="total"></td>
+            </tr>
+            <tr>
+                <td>Student 8</td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td class="total"></td>
+            </tr>
+            <tr>
+                <td>Student 9</td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td class="total"></td>
+            </tr>
+            <tr>
+                <td>Student 10</td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td><input type="text" class="grade-input"></td>
+                <td class="total"></td>
+            </tr>
+            <!-- Add more rows for other students -->
+        </table>
+        <h1></h1>
+        <button class="btn" onclick="calculateTotal()">Calculate Total</button>
+
+        <script>
+            function calculateTotal() {
+                var rows = document.getElementsByTagName('tr');
+
+                for (var i = 1; i < rows.length; i++) {
+                    var inputs = rows[i].getElementsByTagName('input');
+                    var total = 0;
+
+                    for (var j = 0; j < inputs.length; j++) {
+                        var grade = parseFloat(inputs[j].value);
+                        total += isNaN(grade) ? 0 : grade;
+                    }
+
+                    rows[i].getElementsByClassName('total')[0].innerText = total.toFixed(2);
+                }
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Grade Calculator</title>
+  <style>
+    /* CSS Styles */
+    body {
+      font-family:cursive;
+      background-color: #f1f1f1;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .form-container {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .form-container label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 8px 16px;
+      margin-bottom: 10px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    .result {
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Grade Calculator</h1>
+
+  <div class="form-container">
+    <label for="grade1">Grade 1:</label>
+    <input type="number" id="grade1" min="0" max="100" required>
+
+    <label for="grade2">Grade 2:</label>
+    <input type="number" id="grade2" min="0" max="100" required>
+
+    <label for="grade3">Grade 3:</label>
+    <input type="number" id="grade3" min="0" max="100" required>
+    <h1></h1>
+    <button class="btn" onclick="calculateGrade()">Calculate</button>
+  </div>
+
+  <p class="result" id="gradeResult"></p>
+
+  <script>
+    // Function to calculate the grade
+    function calculateGrade() {
+      var grade1 = parseFloat(document.getElementById('grade1').value);
+      var grade2 = parseFloat(document.getElementById('grade2').value);
+      var grade3 = parseFloat(document.getElementById('grade3').value);
+
+      if (isNaN(grade1) || isNaN(grade2) || isNaN(grade3)) {
+        alert('Please enter valid grades.');
+        return;
+      }
+
+      var averageGrade = (grade1 + grade2 + grade3) / 3;
+      var letterGrade = '';
+
+      if (averageGrade >= 90) {
+        letterGrade = 'A';
+      } else if (averageGrade >= 80) {
+        letterGrade = 'B';
+      } else if (averageGrade >= 70) {
+        letterGrade = 'C';
+      } else if (averageGrade >= 60) {
+        letterGrade = 'D';
+      } else {
+        letterGrade = 'F';
+      }
+
+      document.getElementById('gradeResult').innerText = 'Your average grade: ' + averageGrade.toFixed(2) + ' (' + letterGrade + ')';
+    }
+  </script>
+</body>
+</html>

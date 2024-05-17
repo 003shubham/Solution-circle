@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz App</title>
+  <style>
+    /* CSS Styles */
+    body {
+      font-family:cursive;
+      background-color: #f1f1f1;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .quiz-container {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .question {
+      margin-bottom: 10px;
+    }
+
+    .options label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 8px 16px;
+      margin-bottom: 10px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Quiz App</h1>
+
+  <div id="quiz-container">
+    <!-- Quiz questions will be displayed here -->
+  </div>
+  <h1></h1>
+  <button class="btn" onclick="submitQuiz()">Submit Quiz</button>
+
+  <script>
+    var quizContainer = document.getElementById('quiz-container');
+    var quizData = [
+      {
+        question: 'What is the capital of France?',
+        options: ['Paris', 'London', 'Madrid', 'Berlin'],
+        answer: 'Paris'
+      },
+      {
+        question: 'Which planet is known as the Red Planet?',
+        options: ['Mars', 'Venus', 'Jupiter', 'Mercury'],
+        answer: 'Mars'
+      },
+      {
+        question: 'What is the largest country in the world by land area?',
+        options: ['Russia', 'Canada', 'China', 'United States'],
+        answer: 'Russia'
+      },
+      {
+        question: 'Who painted the Mona Lisa?',
+        options: ['Leonardo da Vinci', 'Pablo Picasso', 'Vincent van Gogh', 'Michelangelo'],
+        answer: 'Leonardo da Vinci'
+      }
+    ];
+
+    // Function to generate the quiz
+    function generateQuiz() {
+      quizContainer.innerHTML = '';
+
+      for (var i = 0; i < quizData.length; i++) {
+        var questionDiv = document.createElement('div');
+        questionDiv.classList.add('quiz-container');
+
+        var questionElement = document.createElement('p');
+        questionElement.classList.add('question');
+        questionElement.innerText = quizData[i].question;
+
+        var optionsDiv = document.createElement('div');
+        optionsDiv.classList.add('options');
+
+        for (var j = 0; j < quizData[i].options.length; j++) {
+          var optionLabel = document.createElement('label');
+          var optionInput = document.createElement('input');
+          optionInput.type = 'radio';
+          optionInput.name = 'question-' + i;
+          optionInput.value = quizData[i].options[j];
+
+          optionLabel.appendChild(optionInput);
+          optionLabel.appendChild(document.createTextNode(quizData[i].options[j]));
+
+          optionsDiv.appendChild(optionLabel);
+        }
+
+        questionDiv.appendChild(questionElement);
+        questionDiv.appendChild(optionsDiv);
+        quizContainer.appendChild(questionDiv);
+      }
+    }
+
+    // Function to calculate quiz score
+    function submitQuiz() {
+      var score = 0;
+
+      for (var i = 0; i < quizData.length; i++) {
+        var selectedOption = document.querySelector('input[name="question-' + i + '"]:checked');
+        
+        if (selectedOption && selectedOption.value === quizData[i].answer) {
+          score++;
+        }
+      }
+
+      alert('Your score: ' + score + ' out of ' + quizData.length);
+    }
+
+    // Generate the quiz on page load
+    window.onload = generateQuiz;
+  </script>
+</body>
+</html>
